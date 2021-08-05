@@ -17,7 +17,7 @@ export default {
   display: flex;
   justify-content: center;
 
-  padding: 2rem;
+  padding: 32px;
 
   &__content {
     width: 100%;

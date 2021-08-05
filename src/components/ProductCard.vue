@@ -1,0 +1,87 @@
+<template>
+  <base-card class="product-card">
+    <img class="product-card__image" :src="imageLink" />
+    <div class="product-card__text">
+      <p class="product-card__name">{{ name }}</p>
+      <p class="product-card__description">{{ description }}</p>
+      <p class="product-card__price">{{ formattedPrice }} руб.</p>
+    </div>
+    <base-button class="product-card__delete-button" icon red><icon-trash /></base-button>
+  </base-card>
+</template>
+
+<script>
+import IconTrash from '@/components/icons/IconTrash.vue';
+import BaseCard from '@/components/common/BaseCard.vue';
+import BaseButton from '@/components/common/BaseButton.vue';
+
+import { separateThousands } from '@/utils/common';
+
+export default {
+  name: 'ProductCard',
+  components: { BaseButton, BaseCard, IconTrash },
+  props: {
+    name: { type: String, default: '' },
+    description: { type: String, default: '' },
+    imageLink: { type: String, default: '' },
+    price: { type: Number, default: 0 },
+  },
+  computed: {
+    formattedPrice() {
+      return separateThousands(this.price);
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.product-card {
+  $this: &;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  &__text {
+    padding: 16px 16px 24px;
+  }
+
+  &__image {
+    width: 100%;
+    height: 200px;
+    display: block;
+    object-fit: cover;
+    border-top-left-radius: $--border-radius-base;
+    border-top-right-radius: $--border-radius-base;
+  }
+
+  &__name {
+    font-size: $--font-size-subtitle;
+    font-weight: $--font-weight-semiBold;
+    margin-bottom: 16px;
+  }
+
+  &__description {
+    margin-bottom: 32px;
+  }
+
+  &__price {
+    font-size: $--font-size-title;
+    font-weight: $--font-weight-semiBold;
+  }
+
+  &:hover,
+  &:focus {
+    #{$this}__delete-button {
+      opacity: 1;
+    }
+  }
+
+  &__delete-button {
+    opacity: 0;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    transition: opacity 0.2s;
+  }
+}
+</style>

@@ -1,8 +1,13 @@
 <template>
   <button
     class="base-button"
-    :class="{ 'base-button--primary': primary, 'base-button--disabled': disabled }"
     :type="type"
+    :class="{
+      'base-button--primary': primary,
+      'base-button--red': red,
+      'base-button--icon': icon,
+      'base-button--disabled': disabled,
+    }"
   >
     <slot />
   </button>
@@ -13,6 +18,8 @@ export default {
   name: 'BaseButton',
   props: {
     type: { type: String, default: 'Button' },
+    icon: { type: Boolean, default: false },
+    red: { type: Boolean, default: false },
     primary: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
   },
@@ -23,9 +30,9 @@ export default {
 .base-button {
   width: 100%;
   background: none;
-  border: 1px solid;
+  border: none;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: $--border-radius-large;
   cursor: pointer;
   transition: opacity 0.2s linear;
 
@@ -35,13 +42,24 @@ export default {
 
   &--primary {
     background: $--green;
-    border-color: $--green;
     color: $--white;
+  }
+
+  &--red {
+    background: $--red;
+    color: $--white;
+  }
+
+  &--icon {
+    width: auto;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &--disabled {
     background: $--gray;
-    border-color: $--gray;
     color: $--gray300;
     cursor: default;
 

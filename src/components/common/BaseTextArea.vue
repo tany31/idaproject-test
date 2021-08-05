@@ -41,12 +41,13 @@ export default {
   &__control {
     display: block;
     width: 100%;
-    padding: 0.65rem 1rem;
+    padding: 10px 16px;
     border: 1px solid transparent;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
+    border-radius: $--border-radius-base;
     font-size: $--font-size-medium;
-    font-family: $--font-family;
+    font-family: inherit;
+    background: $--yellow-light;
     resize: none;
 
     &:focus,
@@ -56,8 +57,8 @@ export default {
     }
 
     &::placeholder {
-      color: $--gray300;
       font-size: $--font-size-medium;
+      color: $--gray300;
     }
 
     &--error {

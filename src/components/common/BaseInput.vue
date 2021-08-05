@@ -47,12 +47,14 @@ export default {
   &__control {
     display: block;
     width: 100%;
-    padding: 0.65rem 1rem;
+    padding: 10px 16px;
     margin-top: 3px;
     border: 1px solid transparent;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
+    border-radius: $--border-radius-base;
+    font-family: inherit;
     font-size: $--font-size-medium;
+    background: $--yellow-light;
 
     &:focus,
     &:active {
