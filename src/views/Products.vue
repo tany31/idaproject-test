@@ -4,15 +4,19 @@
       <h1 class="products__title">Добавление товара</h1>
     </div>
     <div class="products__content">
-      <div class="products__create-form">form</div>
+      <div class="products__create-form">
+        <create-product-form />
+      </div>
       <div class="products__items">items</div>
     </div>
   </div>
 </template>
 
 <script>
+import CreateProductForm from '@/components/CreateProductForm.vue';
 export default {
   name: 'Products',
+  components: { CreateProductForm },
 };
 </script>
 

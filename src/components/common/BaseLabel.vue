@@ -17,6 +17,8 @@ export default {
 .base-label {
   font-size: $--font-size-small;
   position: relative;
+  line-height: 13px;
+  letter-spacing: -0.02em;
 
   &--required:after {
     content: '';

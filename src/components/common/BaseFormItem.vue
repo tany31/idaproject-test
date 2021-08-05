@@ -18,8 +18,7 @@ export default {
 .base-form-item {
   &__error {
     display: block;
-    min-height: 13px;
-    margin-top: 3px;
+    min-height: 10px;
     font-size: $--font-size-extra-small;
     color: $--red;
   }
