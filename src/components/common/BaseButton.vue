@@ -8,6 +8,7 @@
       'base-button--icon': icon,
       'base-button--disabled': disabled,
     }"
+    v-on="$listeners"
   >
     <slot />
   </button>
