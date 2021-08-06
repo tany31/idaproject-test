@@ -6,7 +6,7 @@
       <p class="product-card__description">{{ description }}</p>
       <p class="product-card__price">{{ formattedPrice }} руб.</p>
     </div>
-    <base-button class="product-card__delete-button" icon red><icon-trash /></base-button>
+    <base-button class="product-card__delete-button" icon red @click="deleteProduct"><icon-trash /></base-button>
   </base-card>
 </template>
 
@@ -29,6 +29,11 @@ export default {
   computed: {
     formattedPrice() {
       return separateThousands(this.price);
+    },
+  },
+  methods: {
+    deleteProduct() {
+      this.$emit('delete-product');
     },
   },
 };

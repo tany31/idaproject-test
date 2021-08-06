@@ -9,7 +9,7 @@
       </div>
       <div class="products__items">
         <div v-for="product in products" :key="product.id" class="products__item">
-          <product-card v-bind="product" />
+          <product-card v-bind="product" @delete-product="deleteProduct(product.id)" />
         </div>
       </div>
     </div>
@@ -98,6 +98,9 @@ export default {
   methods: {
     createProduct(newProduct) {
       this.products.push(newProduct);
+    },
+    deleteProduct(id) {
+      this.products = this.products.filter((p) => p.id !== id);
     },
   },
 };
