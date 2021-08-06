@@ -5,7 +5,7 @@
     </div>
     <div class="products__content">
       <div class="products__create-form">
-        <create-product-form />
+        <create-product-form @create-product="createProduct" />
       </div>
       <div class="products__items">
         <div v-for="product in products" :key="product.id" class="products__item">
@@ -94,6 +94,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    createProduct(newProduct) {
+      this.products.push(newProduct);
+    },
   },
 };
 </script>
