@@ -1,28 +1,48 @@
 <template>
   <base-card>
-    <form class="create-product-form" @submit.prevent="createProduct">
-      <base-input
-        v-model="model.name"
-        placeholder="Введите наименование товара"
-        label="Наименование товара"
-        required
-        error-message="Поле является обязательным"
-      />
-      <base-text-area v-model="model.description" label="Описание товара" placeholder="Введите описание товара" />
-      <base-input
-        v-model="model.imageLink"
-        placeholder="Введите ссылку"
-        label="Ссылка на изображение товара"
-        required
-      />
-      <base-input v-model="model.price" placeholder="Введите цену" label="Цена товара" required />
+    <ValidationObserver ref="validationForm" v-slot="{ handleSubmit, invalid }">
+      <form class="create-product-form" @submit.prevent="handleSubmit(createProduct)">
+        <ValidationProvider v-slot="{ errors }" rules="required" name="name">
+          <base-input
+            v-model.trim="model.name"
+            placeholder="Введите наименование товара"
+            label="Наименование товара"
+            required
+            :error-message="errors[0]"
+          />
+        </ValidationProvider>
+        <base-text-area v-model="model.description" label="Описание товара" placeholder="Введите описание товара" />
+        <ValidationProvider v-slot="{ errors }" rules="required" name="image">
+          <base-input
+            v-model="model.imageLink"
+            placeholder="Введите ссылку"
+            label="Ссылка на изображение товара"
+            required
+            :error-message="errors[0]"
+          />
+        </ValidationProvider>
 
-      <base-button class="create-product-form__button" primary type="submit">Добавить товар</base-button>
-    </form>
+        <ValidationProvider v-slot="{ errors }" rules="required" name="price">
+          <base-input
+            v-model="model.price"
+            placeholder="Введите цену"
+            label="Цена товара"
+            required
+            :error-message="errors[0]"
+          />
+        </ValidationProvider>
+
+        <base-button class="create-product-form__button" :disabled="invalid" primary type="submit"
+          >Добавить товар</base-button
+        >
+      </form>
+    </ValidationObserver>
   </base-card>
 </template>
 
 <script>
+import { ValidationProvider, ValidationObserver } from 'vee-validate';
+
 import BaseInput from '@/components/common/BaseInput.vue';
 import BaseTextArea from '@/components/common/BaseTextArea.vue';
 import BaseButton from '@/components/common/BaseButton.vue';
@@ -39,7 +59,7 @@ function generateModel() {
 
 export default {
   name: 'CreateProductForm',
-  components: { BaseInput, BaseTextArea, BaseButton, BaseCard },
+  components: { BaseInput, BaseTextArea, BaseButton, BaseCard, ValidationProvider, ValidationObserver },
   data() {
     return {
       model: generateModel(),
@@ -49,6 +69,7 @@ export default {
     createProduct() {
       this.$emit('create-product', { ...this.model, price: +this.model.price, id: Date.now() });
       this.model = generateModel();
+      this.$refs.validationForm.reset();
     },
   },
 };
