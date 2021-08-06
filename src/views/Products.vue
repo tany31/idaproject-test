@@ -20,6 +20,9 @@
 import CreateProductForm from '@/components/CreateProductForm.vue';
 import ProductCard from '@/components/ProductCard.vue';
 
+import { PRODUCTS_KEY } from '@/constants/localStorage';
+import { saveStorageItem, loadStorageItem } from '@/utils/localStorage';
+
 export default {
   name: 'Products',
   components: { CreateProductForm, ProductCard },
@@ -94,6 +97,15 @@ export default {
         },
       ],
     };
+  },
+
+  watch: {
+    products() {
+      saveStorageItem(PRODUCTS_KEY, JSON.stringify(this.products));
+    },
+  },
+  created() {
+    this.products = JSON.parse(loadStorageItem(PRODUCTS_KEY)) || [];
   },
   methods: {
     createProduct(newProduct) {
