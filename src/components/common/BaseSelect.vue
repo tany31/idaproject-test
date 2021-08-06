@@ -13,6 +13,10 @@ import IconArrowDown from '@/components/icons/IconArrowDown.vue';
 export default {
   name: 'BaseSelect',
   components: { IconArrowDown },
+  model: {
+    prop: 'value',
+    event: 'update:value',
+  },
   props: {
     value: { type: [String, Number], default: '' },
     options: { type: Array, default: () => [] },
@@ -58,7 +62,7 @@ export default {
     line-height: inherit;
 
     cursor: pointer;
-    background: #fffefb;
+    background: $--yellow-light;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
 
