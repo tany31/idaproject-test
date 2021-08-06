@@ -2,13 +2,14 @@
   <div class="products">
     <div class="products__headline">
       <h1 class="products__title">Добавление товара</h1>
+      <base-select v-model="sortValue" :options="$options.sortOptions" />
     </div>
     <div class="products__content">
       <div class="products__create-form">
         <create-product-form @create-product="createProduct" />
       </div>
       <div class="products__items">
-        <div v-for="product in products" :key="product.id" class="products__item">
+        <div v-for="product in sortedProducts" :key="product.id" class="products__item">
           <product-card v-bind="product" @delete-product="deleteProduct(product.id)" />
         </div>
       </div>
@@ -19,84 +20,45 @@
 <script>
 import CreateProductForm from '@/components/CreateProductForm.vue';
 import ProductCard from '@/components/ProductCard.vue';
+import BaseSelect from '@/components/common/BaseSelect.vue';
 
 import { PRODUCTS_KEY } from '@/constants/localStorage';
 import { saveStorageItem, loadStorageItem } from '@/utils/localStorage';
 
+const SORT_DEFAULT = 'default';
+const SORT_PRICE_MIN = 'priceMin';
+const SORT_PRICE_MAX = 'priceMax';
+const SORT_NAME = 'name';
+
+const sortOptions = [
+  { text: 'По умолчанию', value: SORT_DEFAULT },
+  { text: 'По цене min', value: SORT_PRICE_MIN },
+  { text: 'По цене max', value: SORT_PRICE_MAX },
+  { text: 'По наименованию', value: SORT_NAME },
+];
+
+const sortModel = {
+  [SORT_DEFAULT]: () => 0,
+  [SORT_NAME]: (a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()),
+  [SORT_PRICE_MIN]: (a, b) => a.price - b.price,
+  [SORT_PRICE_MAX]: (a, b) => b.price - a.price,
+};
+
 export default {
   name: 'Products',
-  components: { CreateProductForm, ProductCard },
+  components: { CreateProductForm, ProductCard, BaseSelect },
+  sortOptions,
   data() {
     return {
-      products: [
-        {
-          id: 1,
-          name: 'Наименование товара',
-          description:
-            'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          price: 10000,
-          imageLink:
-            'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-        },
-        {
-          id: 2,
-          name: 'Наименование товара',
-          description:
-            'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          price: 10000,
-          imageLink: 'https://i.ibb.co/HPdYXpF/Rectangle-31.jpg',
-        },
-        {
-          id: 3,
-          name: 'Наименование товара',
-          description:
-            'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          price: 10000,
-          imageLink:
-            'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZHVjdHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80',
-        },
-        {
-          id: 4,
-          name: 'Наименование товара',
-          description:
-            'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          price: 10000,
-          imageLink: 'https://i.ibb.co/HPdYXpF/Rectangle-31.jpg',
-        },
-        {
-          id: 5,
-          name: 'Наименование товара',
-          description:
-            'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          price: 1000000,
-          imageLink: 'https://i.ibb.co/HPdYXpF/Rectangle-31.jpg',
-        },
-        {
-          id: 6,
-          name: 'Наименование товара',
-          description:
-            'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          price: 1000,
-          imageLink: 'https://i.ibb.co/HPdYXpF/Rectangle-31.jpg',
-        },
-        {
-          id: 7,
-          name: 'Наименование товара',
-          description:
-            'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          price: 1,
-          imageLink: 'https://i.ibb.co/HPdYXpF/Rectangle-31.jpg',
-        },
-        {
-          id: 8,
-          name: 'Наименование товара',
-          description:
-            'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          price: 100,
-          imageLink: 'https://i.ibb.co/HPdYXpF/Rectangle-31.jpg',
-        },
-      ],
+      products: [],
+      sortValue: sortOptions[0].value,
     };
+  },
+
+  computed: {
+    sortedProducts() {
+      return [...this.products].sort(sortModel[this.sortValue]);
+    },
   },
 
   watch: {
