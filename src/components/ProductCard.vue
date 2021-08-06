@@ -2,8 +2,10 @@
   <base-card class="product-card">
     <img class="product-card__image" :src="imageLink" />
     <div class="product-card__text">
-      <p class="product-card__name">{{ name }}</p>
-      <p class="product-card__description">{{ description }}</p>
+      <div class="product-card__info">
+        <p class="product-card__name">{{ name }}</p>
+        <p class="product-card__description">{{ description }}</p>
+      </div>
       <p class="product-card__price">{{ formattedPrice }} руб.</p>
     </div>
     <base-button class="product-card__delete-button" icon red @click="deleteProduct"><icon-trash /></base-button>
@@ -45,8 +47,14 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
 
   &__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     padding: 16px 16px 24px;
   }
 
