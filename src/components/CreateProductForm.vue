@@ -23,7 +23,7 @@
         </ValidationProvider>
 
         <ValidationProvider v-slot="{ errors }" rules="required" name="price">
-          <base-input
+          <base-price-input
             v-model="model.price"
             placeholder="Введите цену"
             label="Цена товара"
@@ -47,6 +47,7 @@ import BaseInput from '@/components/common/BaseInput.vue';
 import BaseTextArea from '@/components/common/BaseTextArea.vue';
 import BaseButton from '@/components/common/BaseButton.vue';
 import BaseCard from '@/components/common/BaseCard.vue';
+import BasePriceInput from '@/components/common/BasePriceInput.vue';
 
 function generateModel() {
   return {
@@ -59,7 +60,7 @@ function generateModel() {
 
 export default {
   name: 'CreateProductForm',
-  components: { BaseInput, BaseTextArea, BaseButton, BaseCard, ValidationProvider, ValidationObserver },
+  components: { BaseInput, BasePriceInput, BaseTextArea, BaseButton, BaseCard, ValidationProvider, ValidationObserver },
   data() {
     return {
       model: generateModel(),

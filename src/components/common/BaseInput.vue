@@ -2,11 +2,13 @@
   <base-form-item class="base-input" :error-message="errorMessage">
     <base-label v-if="label" :required="required">{{ label }}</base-label>
     <input
+      ref="control"
       v-model="localModel"
       class="base-input__control"
       :class="{ 'base-input__control--error': errorMessage }"
       type="text"
       :placeholder="placeholder"
+      v-on="$listeners"
     />
   </base-form-item>
 </template>
