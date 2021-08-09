@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $--yellow-light: #fffefb;
 $--red: #FF8484;
 $--green: #7BAE73;
@@ -22,7 +24,7 @@ $--font-size-title: 28px;
 $--font-size-subtitle: 20px;
 
 $--gutter: 16px;
-$--gutter-sm: $--gutter / 2;
+$--gutter-sm: math.div($--gutter, 2);
 $--gutter-md: $--gutter * 1.5;
 $--gutter-lg: $--gutter * 2;
 

@@ -1,9 +1,9 @@
 <template>
   <base-card class="product-card">
-    <img class="product-card__image" :src="imageLink" />
+    <img class="product-card__image" :src="imageLink" :alt="`${name} image`" />
     <div class="product-card__text">
       <div class="product-card__info">
-        <p class="product-card__name">{{ name }}</p>
+        <p class="product-card__name" :title="name">{{ name }}</p>
         <p class="product-card__description">{{ description }}</p>
       </div>
       <p class="product-card__price">{{ formattedPrice }} руб.</p>
@@ -42,6 +42,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/styles/mixins/text-clamp';
+
 .product-card {
   $this: &;
   width: 100%;
@@ -72,10 +74,14 @@ export default {
     font-size: $--font-size-subtitle;
     font-weight: $--font-weight-semiBold;
     margin-bottom: $--gutter;
+    word-break: break-word;
+    @include text-clamp(2);
   }
 
   &__description {
     margin-bottom: $--gutter-lg;
+    word-break: break-word;
+    @include text-clamp(4);
   }
 
   &__price {
