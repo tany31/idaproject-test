@@ -81,20 +81,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/styles/mixins/media';
+
 .products {
   &__headline {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 16px;
+
+    @include media('xs') {
+      flex-direction: column;
+    }
   }
 
   &__title {
     font-size: $--font-size-title;
     font-weight: $--font-weight-semiBold;
+
+    @include media('xs') {
+      margin-bottom: 16px;
+    }
   }
 
   &__content {
     display: flex;
+
+    @include media('xs') {
+      flex-direction: column;
+    }
   }
 
   &__create-form {
@@ -104,6 +119,16 @@ export default {
     width: 332px;
     flex-shrink: 0;
     margin-right: 16px;
+
+    @include media('sm') {
+      width: 300px;
+    }
+
+    @include media('xs') {
+      position: static;
+      margin-bottom: 16px;
+      width: 100%;
+    }
   }
 
   &__items {
@@ -117,6 +142,14 @@ export default {
     transition: all 1s;
     padding: 8px;
     width: 33.333%;
+
+    @include media('sm') {
+      width: 50%;
+    }
+
+    @include media('xxs') {
+      width: 100%;
+    }
   }
 }
 
