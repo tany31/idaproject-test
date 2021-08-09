@@ -88,7 +88,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 16px;
+    margin-bottom: $--gutter;
 
     @include media('xs') {
       flex-direction: column;
@@ -100,7 +100,7 @@ export default {
     font-weight: $--font-weight-semiBold;
 
     @include media('xs') {
-      margin-bottom: 16px;
+      margin-bottom: $--gutter;
     }
   }
 
@@ -114,11 +114,11 @@ export default {
 
   &__create-form {
     position: sticky;
-    top: 24px;
+    top: $--gutter-md;
     height: 100%;
     width: 332px;
     flex-shrink: 0;
-    margin-right: 16px;
+    margin-right: $--gutter;
 
     @include media('sm') {
       width: 300px;
@@ -126,7 +126,7 @@ export default {
 
     @include media('xs') {
       position: static;
-      margin-bottom: 16px;
+      margin-bottom: $--gutter;
       width: 100%;
     }
   }
@@ -135,12 +135,12 @@ export default {
     flex-grow: 1;
     display: flex;
     flex-flow: row wrap;
-    margin: -8px;
+    margin: -$--gutter-sm;
   }
 
   &__item {
     transition: all 1s;
-    padding: 8px;
+    padding: $--gutter-sm;
     width: 33.333%;
 
     @include media('sm') {

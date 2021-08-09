@@ -55,7 +55,7 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    padding: 16px 16px 24px;
+    padding: $--gutter $--gutter $--gutter-md;
   }
 
   &__image {
@@ -71,11 +71,11 @@ export default {
   &__name {
     font-size: $--font-size-subtitle;
     font-weight: $--font-weight-semiBold;
-    margin-bottom: 16px;
+    margin-bottom: $--gutter;
   }
 
   &__description {
-    margin-bottom: 32px;
+    margin-bottom: $--gutter-lg;
   }
 
   &__price {

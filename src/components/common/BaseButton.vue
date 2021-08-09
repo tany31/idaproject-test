@@ -53,7 +53,7 @@ export default {
 
   &--icon {
     width: auto;
-    padding: 8px;
+    padding: $--gutter-sm;
     display: flex;
     align-items: center;
     justify-content: center;

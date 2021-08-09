@@ -48,7 +48,7 @@ export default {
     top: 0;
     right: 0;
     height: 100%;
-    padding: 10px 16px;
+    padding: 10px $--gutter;
   }
 
   &__control {

@@ -78,10 +78,10 @@ export default {
 
 <style lang="scss" scoped>
 .create-product-form {
-  padding: 16px 24px;
+  padding: $--gutter $--gutter-md;
 
   &__button {
-    margin-top: 8px;
+    margin-top: $--gutter-sm;
   }
 }
 </style>
