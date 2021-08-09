@@ -20,3 +20,17 @@ $--font-size-medium: 12px;
 $--font-size-base: 16px;
 $--font-size-title: 28px;
 $--font-size-subtitle: 20px;
+
+$--gutter: 16px;
+$--gutter-sm: $--gutter / 2;
+$--gutter-md: $--gutter * 1.5;
+$--gutter-lg: $--gutter * 2;
+
+$screens: (
+  'xxs': 440px,
+  'xs':  768px,
+  'sm':  1024px,
+  'md':  1280px,
+  'lg':  1440px,
+  'xl':  1920px,
+);

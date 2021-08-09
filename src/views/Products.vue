@@ -81,42 +81,75 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/styles/mixins/media';
+
 .products {
   &__headline {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 16px;
+    align-items: flex-start;
+    margin-bottom: $--gutter;
+
+    @include media('xs') {
+      flex-direction: column;
+    }
   }
 
   &__title {
     font-size: $--font-size-title;
     font-weight: $--font-weight-semiBold;
+
+    @include media('xs') {
+      margin-bottom: $--gutter;
+    }
   }
 
   &__content {
     display: flex;
+
+    @include media('xs') {
+      flex-direction: column;
+    }
   }
 
   &__create-form {
     position: sticky;
-    top: 24px;
+    top: $--gutter-md;
     height: 100%;
     width: 332px;
     flex-shrink: 0;
-    margin-right: 16px;
+    margin-right: $--gutter;
+
+    @include media('sm') {
+      width: 300px;
+    }
+
+    @include media('xs') {
+      position: static;
+      margin-bottom: $--gutter;
+      width: 100%;
+    }
   }
 
   &__items {
     flex-grow: 1;
     display: flex;
     flex-flow: row wrap;
-    margin: -8px;
+    margin: -$--gutter-sm;
   }
 
   &__item {
     transition: all 1s;
-    padding: 8px;
+    padding: $--gutter-sm;
     width: 33.333%;
+
+    @include media('sm') {
+      width: 50%;
+    }
+
+    @include media('xxs') {
+      width: 100%;
+    }
   }
 }
 

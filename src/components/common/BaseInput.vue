@@ -49,7 +49,7 @@ export default {
   &__control {
     display: block;
     width: 100%;
-    padding: 10px 16px;
+    padding: 10px $--gutter;
     margin-top: 3px;
     border: 1px solid transparent;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
