@@ -8,11 +8,11 @@
       <div class="products__create-form">
         <create-product-form @create-product="createProduct" />
       </div>
-      <div class="products__items">
+      <transition-group name="product-list" class="products__items" tag="div">
         <div v-for="product in sortedProducts" :key="product.id" class="products__item">
           <product-card v-bind="product" @delete-product="deleteProduct(product.id)" />
         </div>
-      </div>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -32,8 +32,8 @@ const SORT_NAME = 'name';
 
 const sortOptions = [
   { text: 'По умолчанию', value: SORT_DEFAULT },
-  { text: 'По цене min', value: SORT_PRICE_MIN },
-  { text: 'По цене max', value: SORT_PRICE_MAX },
+  { text: 'По увеличению цены', value: SORT_PRICE_MIN },
+  { text: 'По уменьшению цены', value: SORT_PRICE_MAX },
   { text: 'По наименованию', value: SORT_NAME },
 ];
 
@@ -114,8 +114,26 @@ export default {
   }
 
   &__item {
+    transition: all 1s;
     padding: 8px;
     width: 33.333%;
   }
+}
+
+.product-list-enter-active,
+.product-list-move {
+  transition: all 1s;
+}
+
+.product-list-leave-active {
+  transition: none;
+  position: absolute;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.product-list-enter {
+  opacity: 0;
+  transform: translateY(-50%);
 }
 </style>

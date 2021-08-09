@@ -1,18 +1,18 @@
 <template>
   <base-card>
-    <ValidationObserver ref="validationForm" v-slot="{ handleSubmit, invalid }">
+    <validation-observer ref="validationForm" v-slot="{ handleSubmit, invalid }">
       <form class="create-product-form" @submit.prevent="handleSubmit(createProduct)">
-        <ValidationProvider v-slot="{ errors }" rules="required" name="name">
+        <validation-provider v-slot="{ errors }" rules="required" name="name">
           <base-input
-            v-model.trim="model.name"
+            v-model="model.name"
             placeholder="Введите наименование товара"
             label="Наименование товара"
             required
             :error-message="errors[0]"
           />
-        </ValidationProvider>
+        </validation-provider>
         <base-text-area v-model="model.description" label="Описание товара" placeholder="Введите описание товара" />
-        <ValidationProvider v-slot="{ errors }" rules="required" name="image">
+        <validation-provider v-slot="{ errors }" rules="required" name="image">
           <base-input
             v-model="model.imageLink"
             placeholder="Введите ссылку"
@@ -20,9 +20,9 @@
             required
             :error-message="errors[0]"
           />
-        </ValidationProvider>
+        </validation-provider>
 
-        <ValidationProvider v-slot="{ errors }" rules="required" name="price">
+        <validation-provider v-slot="{ errors }" rules="required" name="price">
           <base-price-input
             v-model="model.price"
             placeholder="Введите цену"
@@ -30,13 +30,13 @@
             required
             :error-message="errors[0]"
           />
-        </ValidationProvider>
+        </validation-provider>
 
         <base-button class="create-product-form__button" :disabled="invalid" primary type="submit"
           >Добавить товар</base-button
         >
       </form>
-    </ValidationObserver>
+    </validation-observer>
   </base-card>
 </template>
 
