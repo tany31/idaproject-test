@@ -1,5 +1,5 @@
 <template>
-  <base-input ref="input" :value="formattedValue" v-bind="$attrs" min="0" @update:value="handleInput" />
+  <base-input ref="input" :value="formattedValue" v-bind="$attrs" v-on="inputListeners" />
 </template>
 
 <script>
@@ -28,6 +28,13 @@ export default {
 
     formattedValue() {
       return separateThousands(this.value);
+    },
+
+    inputListeners() {
+      return {
+        ...this.$listeners,
+        'update:value': this.handleInput,
+      };
     },
   },
   methods: {
