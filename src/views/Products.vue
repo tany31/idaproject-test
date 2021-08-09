@@ -155,6 +155,7 @@ export default {
     display: flex;
     flex-flow: row wrap;
     margin: -$--gutter-sm;
+    position: relative;
   }
 
   &__item {
@@ -178,12 +179,10 @@ export default {
 }
 
 .product-list-leave-active {
-  transition: none;
   position: absolute;
-  opacity: 0;
-  overflow: hidden;
 }
 
+.product-list-leave-to,
 .product-list-enter {
   opacity: 0;
   transform: translateY(-50%);
