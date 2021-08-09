@@ -38,6 +38,7 @@ export default {
 .base-select {
   position: relative;
   color: $--gray300;
+  font-size: $--font-size-medium;
 
   &__arrow {
     pointer-events: none;
