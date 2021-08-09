@@ -1,5 +1,6 @@
 <template>
   <div class="products">
+    <base-loader v-show="loading" />
     <div class="products__headline">
       <h1 class="products__title">Добавление товара</h1>
       <base-select v-model="sortValue" :options="$options.sortOptions" />
@@ -21,6 +22,7 @@
 import CreateProductForm from '@/components/CreateProductForm.vue';
 import ProductCard from '@/components/ProductCard.vue';
 import BaseSelect from '@/components/common/BaseSelect.vue';
+import BaseLoader from '@/components/common/BaseLoader.vue';
 
 import { PRODUCTS_KEY } from '@/constants/localStorage';
 import { saveStorageItem, loadStorageItem } from '@/utils/localStorage';
@@ -46,12 +48,14 @@ const sortModel = {
 
 export default {
   name: 'Products',
-  components: { CreateProductForm, ProductCard, BaseSelect },
+  components: { CreateProductForm, ProductCard, BaseSelect, BaseLoader },
   sortOptions,
   data() {
     return {
       products: [],
       sortValue: sortOptions[0].value,
+
+      loading: false,
     };
   },
 
@@ -67,14 +71,29 @@ export default {
     },
   },
   created() {
-    this.products = JSON.parse(loadStorageItem(PRODUCTS_KEY)) || [];
+    this.loading = true;
+
+    setTimeout(() => {
+      this.loading = false;
+      this.products = JSON.parse(loadStorageItem(PRODUCTS_KEY)) || [];
+    }, 1000);
   },
   methods: {
     createProduct(newProduct) {
-      this.products.push(newProduct);
+      this.loading = true;
+
+      setTimeout(() => {
+        this.products.push(newProduct);
+        this.loading = false;
+      }, 1000);
     },
     deleteProduct(id) {
-      this.products = this.products.filter((p) => p.id !== id);
+      this.loading = true;
+
+      setTimeout(() => {
+        this.products = this.products.filter((p) => p.id !== id);
+        this.loading = false;
+      }, 1000);
     },
   },
 };
